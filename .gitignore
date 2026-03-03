@@ -1,0 +1,11 @@
+.env
+*.env
+*.db
+*.duckdb
+__pycache__/
+*.pyc
+.venv/
+venv/
+.streamlit/secrets.toml
+.DS_Store
+uploads/
