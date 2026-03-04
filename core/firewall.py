@@ -59,7 +59,7 @@ def check_grounded(response: str, chunks: list[str]) -> tuple[bool, str]:
         return False, "No retrieved context — cannot validate response"
     corpus = set(" ".join(chunks).lower().split())
     response_terms = set(
-        w.lower().strip(".,;:!?\"'()")
+        w.lower().strip(".,;:!?\"'()*#_[]")
         for w in response.split()
         if len(w) > 4 and w.lower() not in SKIP_WORDS
     )
