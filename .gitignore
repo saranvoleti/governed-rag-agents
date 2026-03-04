@@ -11,3 +11,5 @@ venv/
 uploads/
 *.swp
 *.swo
+*.swp
+*.swo
