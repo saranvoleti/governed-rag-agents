@@ -9,3 +9,5 @@ venv/
 .streamlit/secrets.toml
 .DS_Store
 uploads/
+*.swp
+*.swo
