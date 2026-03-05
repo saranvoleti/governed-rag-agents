@@ -8,7 +8,9 @@ from core.escalation import evaluate
 from core.firewall import run_firewall, build_fallback
 
 load_dotenv()
-client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+def get_client():
+    return Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 TOOLS = [
     {
@@ -94,7 +96,7 @@ def analyze(query, session_id, domain="healthcare", trace_callback=None):
         trace_callback("agent_start", {"query": query})
 
     for _ in range(10):
-        response = client.messages.create(
+        response = get_client().messages.create(
             model="claude-haiku-4-5",
             max_tokens=1000,
             system=SYSTEM_PROMPT,
