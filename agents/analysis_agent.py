@@ -85,7 +85,7 @@ def run_tool(tool_name, tool_input, session_id, domain):
     return f"Unknown tool: {tool_name}"
 
 
-def analyze(query, session_id, domain="healthcare", trace_callback=None):
+def analyze(query, session_id, domain="healthcare", trace_callback=None, api_key=None):
     init_memory()
     messages = [{"role": "user", "content": query}]
     tool_calls_log = []
@@ -96,7 +96,7 @@ def analyze(query, session_id, domain="healthcare", trace_callback=None):
         trace_callback("agent_start", {"query": query})
 
     for _ in range(10):
-        response = get_client().messages.create(
+        response = get_client(api_key).messages.create(
             model="claude-haiku-4-5",
             max_tokens=1000,
             system=SYSTEM_PROMPT,

@@ -119,11 +119,13 @@ with col1:
             trace_container.markdown("\n\n".join(st.session_state.trace))
 
         with st.spinner("Agents working..."):
+            api_key = st.secrets.get("ANTHROPIC_API_KEY", os.environ.get("ANTHROPIC_API_KEY"))
             result = analyze(
                 query=query,
                 session_id=st.session_state.session_id,
                 domain=domain,
-                trace_callback=on_trace
+                trace_callback=on_trace,
+                api_key=api_key
             )
             st.session_state.result = result
 
