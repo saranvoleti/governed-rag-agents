@@ -54,7 +54,8 @@ Rules:
 
 def run_tool(tool_name, tool_input, session_id, domain):
     if tool_name == "retrieve_from_document":
-        results = retrieve(tool_input["query"], session_id, top_k=5)
+        top_k = 20 if "summar" in tool_input["query"].lower() else 5
+        results = retrieve(tool_input["query"], session_id, top_k=top_k)
         if not results:
             return "No relevant content found in the document."
         return json.dumps([{"text": r["text"], "score": round(r["score"], 3)} for r in results])
