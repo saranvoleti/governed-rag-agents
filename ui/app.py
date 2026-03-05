@@ -1,7 +1,11 @@
 import streamlit as st
 import uuid
 import os
+import sys
 import tempfile
+
+# Add project root to path so imports work on Streamlit Cloud
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Load API key — Streamlit secrets in cloud, environment variable locally
 if "ANTHROPIC_API_KEY" in st.secrets:
