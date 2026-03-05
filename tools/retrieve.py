@@ -88,7 +88,7 @@ def ingest_document(
     for i, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
         chunk_id = f"{session_id}_{document_name}_{i}"
         con.execute(
-            "INSERT OR REPLACE INTO document_chunks VALUES (?, ?, ?, ?, ?, ?)",
+            "INSERT INTO document_chunks VALUES (?, ?, ?, ?, ?, ?)",
             [chunk_id, session_id, document_name, i, chunk,
              json.dumps(embedding.tolist())]
         )
