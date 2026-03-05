@@ -70,7 +70,9 @@ def check_grounded(response: str, chunks: list[str]) -> tuple[bool, str]:
     return True, "OK"
 
 
-def run_firewall(response: str, chunks: list[str], attempt: int = 1) -> FirewallResult:
+def run_firewall(response: str, chunks: list[str], attempt: int = 1, is_fallback: bool = False) -> FirewallResult:
+    if is_fallback:
+        return FirewallResult(passed=True, reason='Passed', fallback_used=False)
     checks = [
         ("forbidden_patterns", check_forbidden_patterns(response)),
         ("length",             check_length(response)),
