@@ -137,7 +137,7 @@ def analyze(query, session_id, domain="healthcare", trace_callback=None, api_key
         if trace_callback:
             trace_callback("firewall_rejected", {"reason": firewall_result.reason})
         final_text = build_fallback(retrieved_chunks, query)
-        firewall_result = run_firewall(final_text, retrieved_chunks, attempt=2)
+        firewall_result = run_firewall(final_text, retrieved_chunks, attempt=2, is_fallback=True)
 
     if trace_callback:
         trace_callback("firewall_result", {"passed": firewall_result.passed, "reason": firewall_result.reason})
