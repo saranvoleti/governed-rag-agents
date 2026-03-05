@@ -9,8 +9,9 @@ MODEL_NAME = "all-MiniLM-L6-v2"
 
 def init_retrieval_store():
     con = duckdb.connect(DB_PATH)
+    con.execute("DROP TABLE IF EXISTS document_chunks")
     con.execute("""
-        CREATE TABLE IF NOT EXISTS document_chunks (
+        CREATE TABLE document_chunks (
             chunk_id TEXT,
             session_id TEXT,
             document_name TEXT,

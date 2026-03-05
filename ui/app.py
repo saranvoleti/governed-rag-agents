@@ -41,16 +41,18 @@ with st.sidebar:
     st.header("Upload Document")
     uploaded = st.file_uploader("PDF, TXT, or DOCX", type=["pdf", "txt", "docx"])
     if uploaded:
-        with tempfile.NamedTemporaryFile(delete=False, suffix=f".{uploaded.name.split('.')[-1]}") as f:
-            f.write(uploaded.read())
-            tmp_path = f.name
-        file_type = uploaded.name.split(".")[-1].lower()
-        with st.spinner("Processing document..."):
-            chunks = ingest_document(tmp_path, file_type, st.session_state.session_id, uploaded.name)
-        os.unlink(tmp_path)
-        st.session_state.document_loaded = True
-        st.session_state.document_name = uploaded.name
-        st.success(f"Loaded: {uploaded.name} ({chunks} chunks)")
+        if uploaded.name != st.session_state.document_name:
+            with tempfile.NamedTemporaryFile(delete=False, suffix=f".{uploaded.name.split('.')[-1]}") as f:
+                f.write(uploaded.read())
+                tmp_path = f.name
+            file_type = uploaded.name.split(".")[-1].lower()
+            with st.spinner("Processing document..."):
+                chunks = ingest_document(tmp_path, file_type, st.session_state.session_id, uploaded.name)
+            os.unlink(tmp_path)
+            st.session_state.document_loaded = True
+            st.session_state.document_name = uploaded.name
+            st.session_state.document_chunks = chunks
+        st.success(f"Loaded: {st.session_state.document_name} ({st.session_state.get('document_chunks', 0)} chunks)")
     domain = st.selectbox("Domain", ["healthcare", "finance", "legal", "ops", "general"])
     if st.button("View session history"):
         rows = get_history(session_id=st.session_state.session_id)
