@@ -4,7 +4,12 @@ import os
 import tempfile
 from dotenv import load_dotenv
 
-load_dotenv()
+import streamlit as st as _st
+try:
+    os.environ["ANTHROPIC_API_KEY"] = _st.secrets["ANTHROPIC_API_KEY"]
+except:
+    from dotenv import load_dotenv
+    load_dotenv()
 
 from tools.retrieve import init_retrieval_store, ingest_document
 from agents.analysis_agent import analyze
