@@ -11,7 +11,7 @@ def init_retrieval_store():
     con = duckdb.connect(DB_PATH)
     con.execute("""
         CREATE TABLE IF NOT EXISTS document_chunks (
-            chunk_id TEXT PRIMARY KEY,
+            chunk_id TEXT,
             session_id TEXT,
             document_name TEXT,
             chunk_index INTEGER,
