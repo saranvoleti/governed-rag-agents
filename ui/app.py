@@ -2,14 +2,10 @@ import streamlit as st
 import uuid
 import os
 import tempfile
-from dotenv import load_dotenv
 
-load_dotenv()
-try:
-    import streamlit as _st
-    os.environ["ANTHROPIC_API_KEY"] = _st.secrets["ANTHROPIC_API_KEY"]
-except:
-    pass
+# Load API key — Streamlit secrets in cloud, environment variable locally
+if "ANTHROPIC_API_KEY" in st.secrets:
+    os.environ["ANTHROPIC_API_KEY"] = st.secrets["ANTHROPIC_API_KEY"]
 
 from tools.retrieve import init_retrieval_store, ingest_document
 from agents.analysis_agent import analyze
