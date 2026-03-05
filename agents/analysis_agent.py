@@ -128,6 +128,8 @@ def analyze(query, session_id, domain="healthcare", trace_callback=None, api_key
 
             messages.append({"role": "user", "content": tool_results})
 
+    fallback_used = False
+
     if trace_callback:
         trace_callback("firewall_check", {})
 
@@ -138,11 +140,12 @@ def analyze(query, session_id, domain="healthcare", trace_callback=None, api_key
             trace_callback("firewall_rejected", {"reason": firewall_result.reason})
         final_text = build_fallback(retrieved_chunks, query)
         firewall_result = run_firewall(final_text, retrieved_chunks, attempt=2, is_fallback=True)
+        fallback_used = True
 
     if trace_callback:
         trace_callback("firewall_result", {"passed": firewall_result.passed, "reason": firewall_result.reason})
 
-    confidence = 0.9 if firewall_result.passed and not firewall_result.fallback_used else 0.5
+    confidence = 0.9 if firewall_result.passed else 0.5
     escalation = evaluate(domain, confidence, "analysis")
 
     log_agent_run(
@@ -166,7 +169,7 @@ def analyze(query, session_id, domain="healthcare", trace_callback=None, api_key
         "answer": final_text,
         "firewall_passed": firewall_result.passed,
         "firewall_reason": firewall_result.reason,
-        "fallback_used": firewall_result.fallback_used,
+        "fallback_used": fallback_used,
         "tool_calls": tool_calls_log,
         "escalate": escalation.escalate,
         "escalation_message": escalation.message,
