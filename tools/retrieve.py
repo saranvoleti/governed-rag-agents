@@ -91,5 +91,11 @@ def retrieve(query, session_id, top_k=5):
         score = float(np.dot(query_embedding, emb) /
                       (np.linalg.norm(query_embedding) * np.linalg.norm(emb) + 1e-9))
         results.append({"text": text, "score": score})
+    # Boost chunks that contain exact query keywords
+    query_words = set(q.lower() for q in query.split() if len(q) > 3)
+    for r in results:
+        text_lower = r["text"].lower()
+        keyword_hits = sum(1 for w in query_words if w in text_lower)
+        r["score"] = r["score"] + (keyword_hits * 0.3)
     results.sort(key=lambda x: x["score"], reverse=True)
     return results[:top_k]
