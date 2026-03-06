@@ -11,7 +11,7 @@ def get_api_key():
     try:
         return st.secrets["ANTHROPIC_API_KEY"]
     except Exception:
-        return os.environ.get("ANTHROPIC_API_KEY", "")
+        return os.environ.get("ANTHROPIC_API_KEY") or None
 
 from tools.retrieve import init_retrieval_store, ingest_document
 from agents.analysis_agent import analyze

@@ -71,7 +71,9 @@ def run_tool(tool_name, tool_input, session_id, domain):
 def analyze(query, session_id, domain="healthcare", trace_callback=None, api_key=None):
     init_memory()
 
-    key = api_key or os.environ.get("ANTHROPIC_API_KEY")
+    key = api_key or os.environ.get("ANTHROPIC_API_KEY") or ""
+    if not key:
+        raise ValueError("ANTHROPIC_API_KEY not set — add it to Streamlit secrets")
     client = Anthropic(api_key=key)
 
     messages = [{"role": "user", "content": query}]
