@@ -33,9 +33,9 @@ def chunk_text(text, chunk_size=400, overlap=50):
 
 def clean_pdf_text(text):
     import re
-    text = re.sub(r'(\w+)- (\w+)', r'\1\2', text)
-    text = re.sub(r'\.(\d+)\s', ' ', text)
-    text = re.sub(r'\s+', ' ', text).strip()
+    text = re.sub(chr(40)+chr(92)+chr(119)+chr(43)+chr(41)+chr(45)+chr(32)+chr(40)+chr(92)+chr(119)+chr(43)+chr(41), chr(92)+chr(49)+chr(92)+chr(50), text)
+    text = re.sub(r"[.]\d+ ", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
     return text
 
 def extract_text(file_path, file_type):
