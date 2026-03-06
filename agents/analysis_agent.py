@@ -130,6 +130,8 @@ def analyze(query, session_id, domain="healthcare", trace_callback=None, api_key
 
     fallback_used = False
 
+    fallback_used = False
+
     if trace_callback:
         trace_callback("firewall_check", {})
 
