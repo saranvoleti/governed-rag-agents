@@ -33,13 +33,8 @@ def chunk_text(text, chunk_size=400, overlap=50):
 
 def clean_pdf_text(text):
     import re
-    # Fix hyphenated line breaks: "dis - cretionary" -> "discretionary"
-    text = re.sub(r'(\w+)\s*-\s*
-\s*(\w+)', r'\1\2', text)
-    text = re.sub(r'(\w+)\s*- (\w+)', r'\1\2', text)
-    # Remove footnote numbers like ".1" at end of sentences
-    text = re.sub(r'\.\d+\s', ' ', text)
-    # Normalize whitespace
+    text = re.sub(r'(\w+)- (\w+)', r'\1\2', text)
+    text = re.sub(r'\.(\d+)\s', ' ', text)
     text = re.sub(r'\s+', ' ', text).strip()
     return text
 
