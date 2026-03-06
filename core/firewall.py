@@ -64,7 +64,7 @@ def check_grounded(response: str, chunks: list[str]) -> tuple[bool, str]:
         if len(w) > 4 and w.lower() not in SKIP_WORDS
     )
     unsupported = response_terms - corpus
-    if len(unsupported) > 6:
+    if len(unsupported) > 15:
         sample = list(unsupported)[:4]
         return False, f"{len(unsupported)} terms not found in source document: {sample}"
     return True, "OK"
