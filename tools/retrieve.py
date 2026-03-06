@@ -31,13 +31,26 @@ def chunk_text(text, chunk_size=400, overlap=50):
         i += chunk_size - overlap
     return chunks
 
+def clean_pdf_text(text):
+    import re
+    # Fix hyphenated line breaks: "dis - cretionary" -> "discretionary"
+    text = re.sub(r'(\w+)\s*-\s*
+\s*(\w+)', r'\1\2', text)
+    text = re.sub(r'(\w+)\s*- (\w+)', r'\1\2', text)
+    # Remove footnote numbers like ".1" at end of sentences
+    text = re.sub(r'\.\d+\s', ' ', text)
+    # Normalize whitespace
+    text = re.sub(r'\s+', ' ', text).strip()
+    return text
+
 def extract_text(file_path, file_type):
     if file_type == "txt":
         return open(file_path, encoding="utf-8", errors="ignore").read()
     if file_type == "pdf":
         import PyPDF2
         reader = PyPDF2.PdfReader(file_path)
-        return " ".join(page.extract_text() or "" for page in reader.pages)
+        raw = " ".join(page.extract_text() or "" for page in reader.pages)
+        return clean_pdf_text(raw)
     if file_type == "docx":
         import docx
         doc = docx.Document(file_path)
