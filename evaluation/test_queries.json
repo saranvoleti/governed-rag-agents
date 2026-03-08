@@ -1,0 +1,22 @@
+[
+  {"id":"q01","query":"What is PAYGO?","expected_keywords":["paygo","pay-as-you-go","mandatory","spending","offset"],"domain":"finance","notes":"Core definition"},
+  {"id":"q02","query":"How does PAYGO reduce the deficit?","expected_keywords":["deficit","spending","revenue","offset","legislation"],"domain":"finance","notes":"Mechanism query"},
+  {"id":"q03","query":"What are the prior authorization requirements?","expected_keywords":["authorization","prior","required","procedure","policy"],"domain":"healthcare","notes":"Policy retrieval"},
+  {"id":"q04","query":"What is CHIP?","expected_keywords":["chip","children","health","insurance","program"],"domain":"healthcare","notes":"Acronym definition"},
+  {"id":"q05","query":"What are the Medicare coverage criteria?","expected_keywords":["medicare","coverage","criteria","eligible","benefit"],"domain":"healthcare","notes":"Coverage policy"},
+  {"id":"q06","query":"What documents are required for enrollment?","expected_keywords":["enrollment","required","documents","application","form"],"domain":"general","notes":"Process query"},
+  {"id":"q07","query":"What are the appeal rights for denied claims?","expected_keywords":["appeal","denied","claim","rights","review"],"domain":"healthcare","notes":"Appeals process"},
+  {"id":"q08","query":"What is the deductible amount?","expected_keywords":["deductible","amount","annual","plan","cost"],"domain":"healthcare","notes":"Specific value"},
+  {"id":"q09","query":"How are premiums calculated?","expected_keywords":["premium","calculated","rate","cost","monthly"],"domain":"finance","notes":"Calculation query"},
+  {"id":"q10","query":"What services are covered under the plan?","expected_keywords":["covered","services","plan","benefits","includes"],"domain":"healthcare","notes":"Coverage scope"},
+  {"id":"q11","query":"What are the network provider requirements?","expected_keywords":["network","provider","requirements","participating","approved"],"domain":"healthcare","notes":"Network policy"},
+  {"id":"q12","query":"How do I file a grievance?","expected_keywords":["grievance","file","complaint","process","submit"],"domain":"general","notes":"Process query"},
+  {"id":"q13","query":"What are the eligibility requirements?","expected_keywords":["eligibility","requirements","qualify","criteria","member"],"domain":"general","notes":"Eligibility"},
+  {"id":"q14","query":"What is the out-of-pocket maximum?","expected_keywords":["out-of-pocket","maximum","limit","annual","cost"],"domain":"healthcare","notes":"Financial limit"},
+  {"id":"q15","query":"What are the prescription drug benefits?","expected_keywords":["prescription","drug","benefit","formulary","covered"],"domain":"healthcare","notes":"Pharmacy benefit"},
+  {"id":"q16","query":"How does the referral process work?","expected_keywords":["referral","process","specialist","primary","required"],"domain":"healthcare","notes":"Referral workflow"},
+  {"id":"q17","query":"What is the coordination of benefits policy?","expected_keywords":["coordination","benefits","primary","secondary","coverage"],"domain":"healthcare","notes":"COB policy"},
+  {"id":"q18","query":"What preventive services are covered at no cost?","expected_keywords":["preventive","services","covered","cost","wellness"],"domain":"healthcare","notes":"Preventive care"},
+  {"id":"q19","query":"What are the mental health coverage requirements?","expected_keywords":["mental","health","coverage","behavioral","parity"],"domain":"healthcare","notes":"Mental health"},
+  {"id":"q20","query":"How is the annual open enrollment period defined?","expected_keywords":["open","enrollment","annual","period","election"],"domain":"general","notes":"Enrollment timing"}
+]
