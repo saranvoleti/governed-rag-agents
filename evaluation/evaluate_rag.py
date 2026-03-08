@@ -1,3 +1,4 @@
+# BM25 run 2026-03-07: Recall@5=1.00  Grounding=1.00  Hallucination=0.0%  Latency=737ms
 # Baseline 2026-03-07: Recall@5=0.95  Grounding=1.00  Hallucination=0.0%  Latency=326ms  Coverage=100%
 import os, sys, json, time, argparse, statistics
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

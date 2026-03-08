@@ -5,6 +5,7 @@ Day 9: compute_grounding_score() - float 0.0-1.0 grounding metric.
 """
 import os, re, json, time
 import duckdb, numpy as np
+from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 
 DB_PATH    = os.environ.get("DB_PATH", "memory.db")
@@ -25,6 +26,26 @@ def _split_by_separator(text, separator):
         return list(text)
     parts = text.split(separator)
     return [p + separator for p in parts[:-1]] + [parts[-1]] if len(parts) > 1 else parts
+
+def _build_bm25(texts):
+    """Build BM25 index from list of chunk texts."""
+    tokenized = [t.lower().split() for t in texts]
+    return BM25Okapi(tokenized)
+
+def _rrf_fuse(dense_results, bm25_results, k=60):
+    """Reciprocal Rank Fusion — combine dense and BM25 rankings."""
+    scores = {}
+    texts  = {}
+    for rank, r in enumerate(dense_results):
+        key = r["chunk_index"]
+        scores[key] = scores.get(key, 0) + 1 / (k + rank + 1)
+        texts[key]  = r
+    for rank, r in enumerate(bm25_results):
+        key = r["chunk_index"]
+        scores[key] = scores.get(key, 0) + 1 / (k + rank + 1)
+        texts[key]  = r
+    fused = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+    return [texts[key] for key, _ in fused]
 
 def recursive_chunk_text(text, chunk_size=512, chunk_overlap=64, separators=None):
     """Recursively split text respecting paragraph/sentence/word boundaries."""
@@ -112,7 +133,7 @@ def ingest_document(file_path, file_type, session_id, document_name,
     return len(chunks)
 
 def retrieve(query, session_id, top_k=5):
-    """Cosine similarity + lightweight keyword boost (+0.05/hit, down from +0.3)."""
+    """Hybrid retrieval: dense (semantic) + BM25 (keyword) fused via RRF."""
     init_retrieval_store()
     t0    = time.perf_counter()
     model = _get_model()
@@ -123,15 +144,31 @@ def retrieve(query, session_id, top_k=5):
         "WHERE session_id=? OR session_id='library'", [session_id]).fetchall()
     con.close()
     if not rows: return []
-    qwords  = {w.lower() for w in query.split() if len(w) > 3}
-    results = []
-    for text, emb_json, chunk_index in rows:
+
+    texts   = [r[0] for r in rows]
+    indexes = [r[2] for r in rows]
+
+    # Dense ranking
+    dense = []
+    for i, (text, emb_json, chunk_index) in enumerate(rows):
         emb   = np.array(json.loads(emb_json))
         score = float(np.dot(qemb, emb) / (np.linalg.norm(qemb) * np.linalg.norm(emb) + 1e-9))
-        score += sum(1 for w in qwords if w in text.lower()) * 0.05
-        results.append({"text": text, "score": score, "chunk_index": chunk_index})
-    results.sort(key=lambda x: x["score"], reverse=True)
-    top = results[:top_k]
+        dense.append({"text": text, "score": score, "chunk_index": chunk_index})
+    dense.sort(key=lambda x: x["score"], reverse=True)
+
+    # BM25 ranking
+    bm25       = _build_bm25(texts)
+    qtokens    = query.lower().split()
+    bm25_scores = bm25.get_scores(qtokens)
+    bm25_ranked = sorted(
+        [{"text": texts[i], "score": float(bm25_scores[i]), "chunk_index": indexes[i]}
+         for i in range(len(texts))],
+        key=lambda x: x["score"], reverse=True
+    )
+
+    # RRF fusion
+    fused = _rrf_fuse(dense[:20], bm25_ranked[:20])
+    top   = fused[:top_k]
     if top: top[0]["retrieval_ms"] = round((time.perf_counter() - t0) * 1000, 1)
     return top
 

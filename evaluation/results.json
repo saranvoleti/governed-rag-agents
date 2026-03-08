@@ -1,17 +1,17 @@
 {
   "summary": {
     "total_queries": 20,
-    "recall_at_k": 0.95,
-    "hits": 19,
+    "recall_at_k": 1.0,
+    "hits": 20,
     "avg_grounding_score": 1.0,
     "hallucination_rate": 0.0,
-    "avg_latency_ms": 326.1,
+    "avg_latency_ms": 737.5,
     "fallback_rate": 0.0,
     "coverage": 1.0,
     "domain_recall": {
       "finance": 1.0,
       "healthcare": 1.0,
-      "general": 0.75
+      "general": 1.0
     },
     "k": 5
   },
@@ -23,12 +23,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "paygo",
-      "top_score": 0.8231,
+      "top_score": 14.2758,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 957.2,
+      "latency_ms": 7640.5,
       "notes": "Core definition"
     },
     {
@@ -38,12 +38,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "deficit",
-      "top_score": 0.8019,
+      "top_score": 10.3044,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 264.7,
+      "latency_ms": 498.9,
       "notes": "Mechanism query"
     },
     {
@@ -53,12 +53,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "authorization",
-      "top_score": 0.4152,
+      "top_score": 7.106,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 276.9,
+      "latency_ms": 338.2,
       "notes": "Policy retrieval"
     },
     {
@@ -68,12 +68,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "chip",
-      "top_score": 0.5653,
+      "top_score": 4.1522,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 291.3,
+      "latency_ms": 429.5,
       "notes": "Acronym definition"
     },
     {
@@ -83,12 +83,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "medicare",
-      "top_score": 0.7677,
+      "top_score": 6.3225,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 399.6,
+      "latency_ms": 401.7,
       "notes": "Coverage policy"
     },
     {
@@ -98,12 +98,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "required",
-      "top_score": 0.4281,
+      "top_score": 6.2802,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 310.3,
+      "latency_ms": 468.3,
       "notes": "Process query"
     },
     {
@@ -113,12 +113,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "rights",
-      "top_score": 0.3906,
+      "top_score": 7.5944,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 296.7,
+      "latency_ms": 333.6,
       "notes": "Appeals process"
     },
     {
@@ -128,12 +128,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "deductible",
-      "top_score": 0.5433,
+      "top_score": 8.9095,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 268.1,
+      "latency_ms": 468.7,
       "notes": "Specific value"
     },
     {
@@ -143,12 +143,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "premium",
-      "top_score": 0.5345,
+      "top_score": 5.8945,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 283.2,
+      "latency_ms": 432.5,
       "notes": "Calculation query"
     },
     {
@@ -158,12 +158,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "covered",
-      "top_score": 0.6898,
+      "top_score": 9.0168,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 342.7,
+      "latency_ms": 316.2,
       "notes": "Coverage scope"
     },
     {
@@ -173,27 +173,27 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "network",
-      "top_score": 0.4863,
+      "top_score": 7.1634,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 275.9,
+      "latency_ms": 331.5,
       "notes": "Network policy"
     },
     {
       "id": "q12",
       "query": "How do I file a grievance?",
       "domain": "general",
-      "recall": 0.0,
-      "hit": false,
-      "matched_keyword": "",
+      "recall": 1.0,
+      "hit": true,
+      "matched_keyword": "submit",
       "top_score": 0.3168,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 328.1,
+      "latency_ms": 462.4,
       "notes": "Process query"
     },
     {
@@ -203,12 +203,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "eligibility",
-      "top_score": 0.5383,
+      "top_score": 7.9646,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 266.0,
+      "latency_ms": 317.7,
       "notes": "Eligibility"
     },
     {
@@ -218,12 +218,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "out-of-pocket",
-      "top_score": 0.3929,
+      "top_score": 7.1816,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 261.4,
+      "latency_ms": 355.8,
       "notes": "Financial limit"
     },
     {
@@ -233,12 +233,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "prescription",
-      "top_score": 0.6722,
+      "top_score": 9.6881,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 269.3,
+      "latency_ms": 383.1,
       "notes": "Pharmacy benefit"
     },
     {
@@ -248,12 +248,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "referral",
-      "top_score": 0.4934,
+      "top_score": 6.5665,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 290.6,
+      "latency_ms": 317.3,
       "notes": "Referral workflow"
     },
     {
@@ -263,12 +263,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "coordination",
-      "top_score": 0.6167,
+      "top_score": 8.6518,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 268.1,
+      "latency_ms": 354.9,
       "notes": "COB policy"
     },
     {
@@ -278,12 +278,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "preventive",
-      "top_score": 0.6218,
+      "top_score": 6.5205,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 316.9,
+      "latency_ms": 292.5,
       "notes": "Preventive care"
     },
     {
@@ -293,12 +293,12 @@
       "recall": 1.0,
       "hit": true,
       "matched_keyword": "mental",
-      "top_score": 0.7543,
+      "top_score": 0.6043,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 270.2,
+      "latency_ms": 290.0,
       "notes": "Mental health"
     },
     {
@@ -307,13 +307,13 @@
       "domain": "general",
       "recall": 1.0,
       "hit": true,
-      "matched_keyword": "annual",
-      "top_score": 0.417,
+      "matched_keyword": "period",
+      "top_score": 7.0552,
       "grounding_score": 1.0,
       "firewall_passed": true,
       "fallback_used": false,
       "chunks_retrieved": 5,
-      "latency_ms": 283.9,
+      "latency_ms": 316.3,
       "notes": "Enrollment timing"
     }
   ]
